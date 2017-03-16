@@ -1,9 +1,10 @@
 class Admin::CategoriesController < ApplicationController
 
+  #before_filter :authorize
+
   def index
     @categories = Category.order(id: :desc).all
   end
-
   def new
     @category = Category.new
   end
