@@ -133,4 +133,46 @@ cat3.products.create!({
 })
 
 
+# REVEIWS
+
+puts "Re-creating Users ..."
+
+User.destroy_all
+
+User.create({
+  first_name: 'Adrian',
+  last_name: 'isAdmin',
+  email: 'a@a.ca',
+  password: 'battery staple'
+})
+
+
+User.create({
+  first_name: 'Sally',
+  last_name: 'Real',
+  email: 'sally@email.ca',
+  password: 'long password'
+})
+
+puts "Re-creating Reviews ..."
+
+users = User.all
+products = Product.all
+
+
+Review.create!({
+  description: 'good stuff',
+  rating: 4,
+  user_id: users.first.id,
+  product_id: products.last.id
+})
+
+Review.create!({
+  description: 'bad stuff',
+  rating: 1,
+  user_id: users.first.id,
+  product_id: products.first.id
+})
+
+
 puts "DONE!"
