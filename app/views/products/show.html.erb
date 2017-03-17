@@ -65,11 +65,11 @@
       <dd><%= review.rating %></dd>
       <dt>Date</dt>
       <dd><%= review.created_at %></dd>
+      <% if current_user %>
       <% if (current_user.first_name == user.first_name) %>
       <dt>Delete</dt>
-
-
       <dd><%= link_to fa_icon('trash'), product_review_path(review.product_id, review.id), method: :delete %></dd>
+      <% end %>
       <% end %>
     </dl>
 
