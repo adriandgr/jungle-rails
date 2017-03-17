@@ -25,4 +25,10 @@
     SOLD OUT!
   </aside>
   <% end %>
+<% if (product.quantity > 0 && product.quantity < 5 )%>
+  <aside class="low-stock">
+    LOW STOCK!
+  </aside>
+  <% end %>
+
 </article>
