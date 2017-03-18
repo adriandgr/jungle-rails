@@ -31,4 +31,20 @@
   </aside>
   <% end %>
 
+  <% review_of_product = @reviews.select do |review|%>
+  <% review.product_id.to_i == product.id %>
+  <% end %>
+
+  <% if review_of_product.length > 0 %>
+  <aside class="rating">
+
+  <% len = review_of_product.length %>
+  <% total_rating = review_of_product.inject(0) { |sum, r| sum + r.rating.to_i }%>
+  <% rating = total_rating / len %>
+  <%= rating %>/5
+
+  </aside>
+  <%end%>
+
+
 </article>

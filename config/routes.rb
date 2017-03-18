@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
 
+  resources :products do
+    resources :reviews, only: [:create, :destroy]
+  end
 
   resource :cart, only: [:show] do
     put    :add_item
@@ -26,6 +29,10 @@ Rails.application.routes.draw do
     root to: 'dashboard#show'
     resources :products, except: [:edit, :update, :show]
     resources :categories, except: [:edit, :update, :show]
+  end
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

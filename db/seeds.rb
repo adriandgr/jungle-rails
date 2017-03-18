@@ -28,6 +28,7 @@ puts "Finding or Creating Categories ..."
 cat1 = Category.find_or_create_by! name: 'Apparel'
 cat2 = Category.find_or_create_by! name: 'Electronics'
 cat3 = Category.find_or_create_by! name: 'Furniture'
+cat4 = Category.find_or_create_by! name: 'Instruments'
 
 ## PRODUCTS
 
@@ -79,7 +80,7 @@ cat1.products.create!({
   name:  'Human Feet Shoes',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel6.jpg'),
-  quantity: 82,
+  quantity: 0,
   price: 224.50
 })
 
@@ -98,6 +99,14 @@ cat2.products.create!({
   image: open_asset('electronics2.jpg'),
   quantity: 3,
   price: 26.00
+})
+
+cat4.products.create!({
+  name:  'Hang',
+  description: Faker::Hipster.paragraph(4),
+  image: open_asset('instrument2.jpg'),
+  quantity: 3,
+  price: 1_673.25
 })
 
 cat2.products.create!({
@@ -120,7 +129,7 @@ cat3.products.create!({
   name:  'Electric Chair',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('furniture2.jpg'),
-  quantity: 2,
+  quantity: 0,
   price: 987.65
 })
 
@@ -130,6 +139,65 @@ cat3.products.create!({
   image: open_asset('furniture3.jpg'),
   quantity: 23,
   price: 2_483.75
+})
+
+cat4.products.create!({
+  name:  'Violin',
+  description: Faker::Hipster.paragraph(4),
+  image: open_asset('instrument1.jpg'),
+  quantity: 3,
+  price: 423.75
+})
+
+
+
+
+# REVEIWS
+
+puts "Re-creating Users ..."
+
+User.destroy_all
+
+User.create({
+  first_name: 'Adrian',
+  last_name: 'isAdmin',
+  email: 'a@a.ca',
+  password: 'battery staple'
+})
+
+
+User.create({
+  first_name: 'Sally',
+  last_name: 'Real',
+  email: 'sally@email.ca',
+  password: 'long password'
+})
+
+puts "Re-creating Reviews ..."
+
+users = User.all
+products = Product.all
+
+
+Review.create!({
+  description: 'good stuff',
+  rating: 4,
+  user_id: users.first.id,
+  product_id: products.last.id
+})
+
+Review.create!({
+  description: 'didn\'t like!',
+  rating: 1,
+  user_id: users.last.id,
+  product_id: products.last.id
+})
+
+Review.create!({
+  description: 'bad stuff',
+  rating: 1,
+  user_id: users.first.id,
+  product_id: products.first.id
 })
 
 

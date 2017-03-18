@@ -24,8 +24,60 @@
           <dd><%= @product.price %></dd>
         </dl>
       </div>
-    </div>
+        </div>
+  <div  class="row">
+      <% if current_user %>
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+          <h2>Review me</h2>
+            <%= form_for [@product, @product.reviews.build] do |form| %>
+              <div class="form-group">
+                <%= form.label :description, 'Review' %>
+                <%= form.text_area :description, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= form.label :rating %>
+                <%= form.select :rating, options_for_select([1, 2, 3, 4, 5]), { include_blank: true }, class: 'form-control' %>
+              </div>
 
+              <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
+            <% end %>
+        </div>
+      <% end %>
+</div>
+<div  class="row">
+
+
+
+<div class="col-sm-12">
+<h2> Reviews </h2>
+  <% if (@reviews.length == 0) %>
+  This product hasn't been reviewed yet.
+  <% end %>
+  <% @reviews.each do |review| %>
+  <% user =  User.find(review.user_id) %>
+    <dl class="dl-horizontal">
+      <dt>User</dt>
+      <dd><%= user.first_name%> <%= user.last_name%></dd>
+      <dt>Review</dt>
+      <dd><%= review.description %></dd>
+      <dt>Rating</dt>
+      <dd><%= review.rating %>/5</dd>
+      <dt>Date</dt>
+      <dd><%= review.created_at %></dd>
+      <% if current_user %>
+      <% if (current_user.first_name == user.first_name) %>
+      <dt>Delete</dt>
+      <dd><%= link_to fa_icon('trash'), product_review_path(review.product_id, review.id), method: :delete %></dd>
+      <% end %>
+      <% end %>
+    </dl>
+
+ <% end %>
+
+ </div>
+</div>
   </article>
+
 
 </section>
