@@ -24,9 +24,11 @@
           <dd><%= @product.price %></dd>
         </dl>
       </div>
+        </div>
+  <div  class="row">
       <% if current_user %>
-        <div class="col-sm-5"></div>
-        <div class="col-sm-7">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
           <h2>Review me</h2>
             <%= form_for [@product, @product.reviews.build] do |form| %>
               <div class="form-group">
@@ -42,10 +44,8 @@
             <% end %>
         </div>
       <% end %>
-    </div>
-
-  <div  class="row">
-
+</div>
+<div  class="row">
 
 
 
@@ -62,7 +62,7 @@
       <dt>Review</dt>
       <dd><%= review.description %></dd>
       <dt>Rating</dt>
-      <dd><%= review.rating %></dd>
+      <dd><%= review.rating %>/5</dd>
       <dt>Date</dt>
       <dd><%= review.created_at %></dd>
       <% if current_user %>

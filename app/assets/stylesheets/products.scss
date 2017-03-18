@@ -38,6 +38,7 @@ main section.categories-show {
         width: 100%;
         opacity: 0.3;
         transition: all 0.3s;
+        z-index: 100;
       }
 
       aside.price {
@@ -74,6 +75,18 @@ main section.categories-show {
         background-color: #FFD300;
         border-top-left-radius: 4px;
         border-bottom-right-radius: 20px;
+        font-size: 0.8em;
+      }
+      aside.rating {
+        color: white;
+        font-weight: 800;
+        position: absolute;
+        bottom: 0;
+        right:0;
+        transform: translateY(-64px);
+        padding: 10px 10px 10px 15px;
+        background-color: green;
+        border-top-left-radius: 20px;
         font-size: 0.8em;
       }
 
