@@ -6,4 +6,5 @@ class JungleMailer < ApplicationMailer
     mail(to: @order.email, subject: 'JungleMailer')
   end
 
+
 end
