@@ -158,19 +158,21 @@ puts "Re-creating Users ..."
 
 User.destroy_all
 
-User.create({
+User.create!({
   first_name: 'Adrian',
   last_name: 'isAdmin',
-  email: 'a@a.ca',
-  password: 'battery staple'
+  email: 'c@.ca',
+  password: 'battery staple',
+  password_confirmation: 'battery staple'
 })
 
 
-User.create({
+User.create!({
   first_name: 'Sally',
   last_name: 'Real',
   email: 'sally@email.ca',
-  password: 'long password'
+  password: 'long password',
+  password_confirmation: 'long password'
 })
 
 puts "Re-creating Reviews ..."
