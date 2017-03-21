@@ -16,6 +16,15 @@ class User < ActiveRecord::Base
     presence: true,
     length: { minimum: 6 }
 
+  def self.authenticate_with_credentials (email, password)
+    found_user = User.find_by_email(email.downcase)
+    if found_user && found_user.authenticate(password)
+      true
+    else
+      false
+    end
+  end
+
   private
   def downcase_email
     if (self.email != nil)
@@ -23,7 +32,5 @@ class User < ActiveRecord::Base
     end
   end
 
-  def authenticate_with_credentials (email, password)
 
-  end
 end

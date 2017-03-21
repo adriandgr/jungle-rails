@@ -64,4 +64,31 @@ RSpec.describe User, type: :model do
       expect {user.save!}.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    # examples for this class method here
+    let(:user) { User.create!(
+      first_name: 'Fake',
+      last_name: 'User',
+      email: 'fake@user.ca',
+      password: 'battery staple',
+      password_confirmation: 'battery staple'
+    )}
+    it 'should log in a user who enters valid credentials' do
+      user.save
+      expect(User.authenticate_with_credentials('fake@user.ca', 'battery staple')).to be_truthy
+    end
+    it 'should reject login for an incorrect password' do
+      user.save
+      expect(User.authenticate_with_credentials('fake@user.ca', 'correct horse')).to be_falsey
+    end
+    it 'should login for case insensitive emails' do
+      user.save
+      expect(User.authenticate_with_credentials('FAKE@user.ca', 'battery staple')).to be_truthy
+    end
+    it 'should reject login for emails with leading spaces' do
+      user.save
+      expect(User.authenticate_with_credentials('   fake@user.ca', 'battery staple')).to be_falsey
+    end
+  end
 end
