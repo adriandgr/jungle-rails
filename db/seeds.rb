@@ -10,7 +10,9 @@ puts "Seeding Data ..."
 
 # Helper functions
 def open_asset(file_name)
-  ENV['BASE_REMOTE'] + file_name
+  url = ENV['BASE_REMOTE'] + file_name
+  p url
+  url
 end
 
 # Only run on development (local) instances not on production, etc.
@@ -24,6 +26,8 @@ end
 ## CATEGORIES
 
 puts "Finding or Creating Categories ..."
+
+Category.destroy_all
 
 cat1 = Category.find_or_create_by! name: 'Apparel'
 cat2 = Category.find_or_create_by! name: 'Electronics'
@@ -43,6 +47,8 @@ cat1.products.create!({
   quantity: 10,
   price: 64.99
 })
+
+
 
 cat1.products.create!({
   name:  'Women\'s Zebra pants',
